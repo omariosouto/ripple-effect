@@ -1,0 +1,65 @@
+
+.btnRipple {
+	width: 300px;
+	height: 100px;
+	outline: 0;
+	border: 1px solid #e15f03;
+	background: #ff6a00;
+	color: white;
+	font-size: 15px;
+	text-transform: uppercase;
+	font-size: 1.4rem;
+	transition: background .3s;
+	/* Importantes	 */
+	overflow: hidden;
+	position: relative;
+}
+
+.btnRipple:hover {
+	background-color: #fb8c00;
+	transition: .5s;
+}
+
+.onda {
+	--scale: 1;
+	--x: 0;
+	--y: 0;
+  --opacity: 0;
+  pointer-events: none;
+	width: 1px;
+  height: 1px;
+	background: blue;
+  display: block;
+  /* Reset de posições */
+	position: absolute;
+	top: 0;
+  left: 0;
+  /* Importantes */
+	will-change: transform;
+	transform: translateX(var(--x)) translateY(var(--y));
+}
+
+.onda:after {
+	content: "";
+	display: block;
+	opacity: var(--opacity);
+	transform: scale(var(--scale));
+	will-change: transform;
+	border-radius: 50%;
+	background: rgba(255,255,255,.4);
+	width: 2px;
+	height: 2px;
+	transition: transform .5s, opacity .3s;
+}
+
+/* ============================ */
+/* ============================ */
+/* Base */
+
+body {
+	background: #eee;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
