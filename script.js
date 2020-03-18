@@ -5,28 +5,29 @@ document.querySelector('button')
     const $onda = document.createElement('span');
     $onda.classList.add('onda');
     $botao.insertAdjacentElement('beforeend', $onda);
-    const dadosBotao = $botao.getBoundingClientRect();
 
-    
-      // Definindo 
-      const top = Math.abs(dadosBotao.y - event.clientY); // Positiva
-      const left = Math.abs(dadosBotao.x - event.clientX); // Positiva
-      const scale = dadosBotao.height; // Menor entre números
+    // 2 - valores de posicao
+    const posicoesDoBotao = $botao.getBoundingClientRect();
 
-      $onda.style.setProperty('--opacity', 1);
-      $onda.style.setProperty('--y', `${top}px`);
-      $onda.style.setProperty('--x', `${left}px`);
-      $onda.style.setProperty('--scale', scale);
+    const topo = Math.abs(posicoesDoBotao.top - event.clientY);
+    const esquerda = Math.abs(posicoesDoBotao.left - event.clientX);
+    const scale  = Math.min(posicoesDoBotao.height, posicoesDoBotao.width); // posicoesDoBotao.height;
 
-      function removeOnda() {
+    $onda.style.setProperty('--topo', `${topo}px`); 
+    $onda.style.setProperty('--esquerda', `${esquerda}px`); 
+    $onda.style.setProperty('--scale', scale); 
+
+    $onda.style.setProperty('--opacity', 1); 
+
+
+    // 3 limpa efeito
+    function limpaEfeito() {
+      $onda.removeEventListener('transitionend', limpaEfeito)
+      $onda.style.setProperty('--opacity', 0); 
+
+      $onda.addEventListener('transitionend', () => {
         $onda.remove();
-      }
-      
-
-      function clearEffect() {
-        $onda.removeEventListener('transitionend', clearEffect);
-        $onda.style.setProperty('--opacity', 0);
-        $onda.addEventListener('transitionend', removeOnda);
-      }
-      $onda.addEventListener('transitionend', clearEffect);
-  });
+      })
+    }
+    $onda.addEventListener('transitionend', limpaEfeito)
+});

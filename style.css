@@ -17,40 +17,44 @@
 
 .btnRipple:hover {
 	background-color: #fb8c00;
-	transition: .5s;
 }
 
+/* ========================================== */
+
 .onda {
-	--scale: 1;
-	--x: 0;
-	--y: 0;
+  --topo: 0;
+  --esquerda: 0;
+  --scale: 0;
   --opacity: 0;
   pointer-events: none;
 	width: 1px;
   height: 1px;
-	background: blue;
+	background: transparent;
   display: block;
   /* Reset de posições */
 	position: absolute;
 	top: 0;
   left: 0;
   /* Importantes */
-	will-change: transform;
-	transform: translateX(var(--x)) translateY(var(--y));
+  will-change: transform;
+  transform: translateX(var(--esquerda)) translateY(var(--topo));
 }
 
 .onda:after {
-	content: "";
-	display: block;
-	opacity: var(--opacity);
-	transform: scale(var(--scale));
-	will-change: transform;
-	border-radius: 50%;
-	background: rgba(255,255,255,.4);
-	width: 2px;
-	height: 2px;
-	transition: transform .5s, opacity .3s;
+  content: "";
+  display: block;
+  width: 100%;
+  border-radius: 50%;
+  width: 2px;
+  height: 2px;
+  background: rgba(255,255,255,.4);
+  /* Importantes */
+  will-change: transform;
+  transform: scale(var(--scale));
+  opacity: var(--opacity);
+  transition: transform .5s, opacity .3s;
 }
+
 
 /* ============================ */
 /* ============================ */
